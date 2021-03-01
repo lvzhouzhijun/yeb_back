@@ -38,7 +38,7 @@ public class JwtTokenUtil {
     private String generateToken(Map<String,Object> claims){
         return Jwts.builder().setClaims(claims)
                 .setExpiration(generateExpirationDate())
-                .signWith(SignatureAlgorithm.ES512,secret)
+                .signWith(SignatureAlgorithm.HS512,secret)
                 .compact();
     }
 
@@ -52,7 +52,7 @@ public class JwtTokenUtil {
         try {
             claims = Jwts.parser()
                     .setSigningKey(secret)
-                    .parseClaimsJwt(token)
+                    .parseClaimsJws(token)
                     .getBody();
         }catch (Exception e){
             e.printStackTrace();

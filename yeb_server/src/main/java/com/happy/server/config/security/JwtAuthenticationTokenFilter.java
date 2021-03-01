@@ -38,8 +38,11 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
+        // 从请求头中获取 token
         String authHeader = httpServletRequest.getHeader(tokenHeader);
+        // 判断 token 不等于 null，并且 开头必须是，我们配置文件配置的 Bearer
         if(null != authHeader && authHeader.startsWith(tokenHead)){
+            // 截取 token
             String authToken = authHeader.substring(tokenHead.length());
             // 根据 token 获取用户名
             String username = jwtTokenUtil.getUserNameFromToken(authToken);
@@ -55,6 +58,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                 }
             }
         }
+        // 放行
         filterChain.doFilter(httpServletRequest,httpServletResponse);
     }
 }
