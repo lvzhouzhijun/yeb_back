@@ -20,5 +20,8 @@
     <sql id="Base_Column_List">
         id, name, phone, telephone, address, enabled, username, password, userFace, remark
     </sql>
+    <select id="getMenusByAdminId" resultType="com.happy.server.pojo.Menu">
+
+    </select>
 
 </mapper>

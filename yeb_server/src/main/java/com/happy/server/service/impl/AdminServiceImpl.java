@@ -6,6 +6,7 @@ import com.happy.server.common.RespBean;
 import com.happy.server.config.security.JwtTokenUtil;
 import com.happy.server.mapper.AdminMapper;
 import com.happy.server.pojo.Admin;
+import com.happy.server.pojo.Menu;
 import com.happy.server.service.IAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,6 +20,7 @@ import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -78,5 +80,12 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         return adminMapper.selectOne(
                 new QueryWrapper<Admin>().eq("username",username)
         .eq("enabled",true));
+    }
+
+    @Override
+    public List<Menu> getMenusByAdminId() {
+        // 获取用户Id
+        Integer id = ((Admin) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        return adminMapper.getMenusByAdminId(id);
     }
 }

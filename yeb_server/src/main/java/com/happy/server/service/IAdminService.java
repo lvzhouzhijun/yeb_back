@@ -3,8 +3,10 @@ package com.happy.server.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.happy.server.common.RespBean;
 import com.happy.server.pojo.Admin;
+import com.happy.server.pojo.Menu;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * <p>
@@ -34,4 +36,10 @@ public interface IAdminService extends IService<Admin> {
      * @return
      */
     Admin getAdminByUserName(String username);
+
+    /**
+     * 通过用户Id查询菜单列表
+     * @return
+     */
+    List<Menu> getMenusByAdminId();
 }
