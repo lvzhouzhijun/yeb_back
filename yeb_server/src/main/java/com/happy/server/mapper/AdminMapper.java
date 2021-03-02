@@ -3,6 +3,7 @@ package com.happy.server.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.happy.server.pojo.Admin;
 import com.happy.server.pojo.Menu;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,5 +17,4 @@ import java.util.List;
  */
 public interface AdminMapper extends BaseMapper<Admin> {
 
-    List<Menu> getMenusByAdminId(Integer id);
 }

@@ -81,11 +81,4 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
                 new QueryWrapper<Admin>().eq("username",username)
         .eq("enabled",true));
     }
-
-    @Override
-    public List<Menu> getMenusByAdminId() {
-        // 获取用户Id
-        Integer id = ((Admin) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
-        return adminMapper.getMenusByAdminId(id);
-    }
 }
