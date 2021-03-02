@@ -5,8 +5,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.happy.server.common.RespBean;
 import com.happy.server.config.security.JwtTokenUtil;
 import com.happy.server.mapper.AdminMapper;
+import com.happy.server.mapper.RoleMapper;
 import com.happy.server.pojo.Admin;
-import com.happy.server.pojo.Menu;
+import com.happy.server.pojo.Role;
 import com.happy.server.service.IAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -49,6 +50,9 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     @Autowired
     private AdminMapper adminMapper;
 
+    @Autowired
+    private RoleMapper roleMapper;
+
     @Override
     public RespBean login(String username, String password, String code, HttpServletRequest request) {
         String captcha = (String) request.getSession().getAttribute("captcha");
@@ -80,5 +84,11 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         return adminMapper.selectOne(
                 new QueryWrapper<Admin>().eq("username",username)
         .eq("enabled",true));
+    }
+
+    @Override
+    public List<Role> getRole(Integer adminId) {
+
+        return roleMapper.getRoles(adminId);
     }
 }
