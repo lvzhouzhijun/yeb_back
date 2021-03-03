@@ -20,7 +20,7 @@ import java.io.IOException;
  *
  * @Auther: Happy
  * @Date: 2021/02/28/21:32
- * @Description: JWT 登录授权过滤器
+ * @Description: JWT 登录授权过滤器，每一次请求都会进行过滤
  */
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 

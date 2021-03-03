@@ -79,7 +79,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 基于 token，不需要 session
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        // 允许登录访问
+        // 允许登录访问，和退出
         http.authorizeRequests()
                 .antMatchers("/login","/logout").permitAll();
         // 除了上面的，所有请求都需要认证
@@ -109,6 +109,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
+        // 放行的路径
         web.ignoring().antMatchers(
                 "/css/**","/js/**",
                 "/doc.html","/webjars/**",
