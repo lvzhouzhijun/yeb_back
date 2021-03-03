@@ -1,13 +1,19 @@
 package com.happy.server.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.happy.server.common.RespBean;
+import com.happy.server.pojo.Menu;
+import com.happy.server.pojo.MenuRole;
 import com.happy.server.pojo.Role;
+import com.happy.server.service.IMenuRoleService;
+import com.happy.server.service.IMenuService;
 import com.happy.server.service.IRoleService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,6 +28,12 @@ public class PermissController {
 
     @Autowired
     private IRoleService roleService;
+
+    @Autowired
+    private IMenuService menuService;
+
+    @Autowired
+    private IMenuRoleService menuRoleService;
 
     @ApiOperation(value = "获取所有的角色")
     @GetMapping("/")
@@ -52,6 +64,17 @@ public class PermissController {
         return RespBean.error("删除失败");
     }
 
+    @ApiOperation(value = "查询所有的菜单")
+    @GetMapping("/menus")
+    public List<Menu> getAllMenus(){
+        return menuService.getAllMenus();
+    }
 
-
+    @ApiOperation(value = "根据角色Id查询菜单Id")
+    @GetMapping("/mid/{rid}")
+    public List<Integer> getMidByRid(@PathVariable Integer rid){
+        return menuRoleService.list(new QueryWrapper<MenuRole>
+                ().eq("rid",rid)).stream()
+                .map(MenuRole::getMid).collect(Collectors.toList());
+    }
 }
