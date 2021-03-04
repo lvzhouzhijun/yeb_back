@@ -39,4 +39,20 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
         }
         return RespBean.error("添加失败");
     }
+
+
+    @Override
+    public RespBean delDep(Integer id) {
+        Department department = new Department();
+        department.setId(id);
+        departmentMapper.delDep(department);
+        if(department.getResult() == -2){
+            return RespBean.error("该部门下，还有子部门，删除失败");
+        }else if(-1 == department.getResult()){
+            return RespBean.error("该部门下还有员工删除失败");
+        }else if(1 == department.getResult()){
+            return RespBean.success("删除成功");
+        }
+        return RespBean.error("删除失败");
+    }
 }

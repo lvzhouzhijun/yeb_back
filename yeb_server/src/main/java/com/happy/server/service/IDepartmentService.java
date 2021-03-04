@@ -28,4 +28,11 @@ public interface IDepartmentService extends IService<Department> {
      * @return
      */
     RespBean addDep(Department dep);
+
+    /**
+     * 删除部门
+     * @param id
+     * @return
+     */
+    RespBean delDep(Integer id);
 }

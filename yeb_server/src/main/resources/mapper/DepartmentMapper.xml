@@ -23,6 +23,14 @@
     <sql id="Base_Column_List">
         id, name, parentId, depPath, enabled, isParent
     </sql>
+    <!--调用存储过程，删除部门-->
+    <select id="delDep" statementType="CALLABLE">
+        {
+            call deleteDep(
+                #{id,mode=IN,jdbcType=INTEGER},
+                #{result,mode=OUT,jdbcType=INTEGER})
+        }
+    </select>
     <!--调用存储过程，添加部门-->
     <select id="addDep" statementType="CALLABLE">
         {call
