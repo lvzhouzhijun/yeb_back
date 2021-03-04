@@ -4,12 +4,12 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.happy.server.pojo.Department">
-        <id column="id" property="id" />
-        <result column="name" property="name" />
-        <result column="parentId" property="parentId" />
-        <result column="depPath" property="depPath" />
-        <result column="enabled" property="enabled" />
-        <result column="isParent" property="isParent" />
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="parentId" property="parentId"/>
+        <result column="depPath" property="depPath"/>
+        <result column="enabled" property="enabled"/>
+        <result column="isParent" property="isParent"/>
     </resultMap>
     <resultMap id="DepartmentWithChildren" extends="BaseResultMap" type="com.happy.server.pojo.Department">
         <collection property="children"
@@ -23,6 +23,18 @@
     <sql id="Base_Column_List">
         id, name, parentId, depPath, enabled, isParent
     </sql>
+    <!--调用存储过程，添加部门-->
+    <select id="addDep" statementType="CALLABLE">
+        {call
+            addDep(
+                    #{name,mode=IN,jdbcType=VARCHAR},
+                    #{parentId,mode=IN,jdbcType=INTEGER},
+                    #{enabled,mode=IN,jdbcType=BOOLEAN},
+                    #{result,mode=OUT,jdbcType=INTEGER},
+                    #{id,mode=OUT,jdbcType=INTEGER}
+                )
+            }
+    </select>
     <select id="getAllDepartments" resultMap="DepartmentWithChildren">
         select
         <include refid="Base_Column_List"/>

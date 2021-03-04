@@ -1,6 +1,7 @@
 package com.happy.server.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.happy.server.common.RespBean;
 import com.happy.server.pojo.Department;
 
 import java.util.List;
@@ -20,4 +21,11 @@ public interface IDepartmentService extends IService<Department> {
      * @return
      */
     List<Department> getAllDepartment();
+
+    /**
+     * 添加部门
+     * @param dep
+     * @return
+     */
+    RespBean addDep(Department dep);
 }

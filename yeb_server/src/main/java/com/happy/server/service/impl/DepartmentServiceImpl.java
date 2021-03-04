@@ -1,6 +1,7 @@
 package com.happy.server.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.happy.server.common.RespBean;
 import com.happy.server.mapper.DepartmentMapper;
 import com.happy.server.pojo.Department;
 import com.happy.server.service.IDepartmentService;
@@ -27,5 +28,15 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
     public List<Department> getAllDepartment() {
 
         return departmentMapper.getAllDepartments(-1);
+    }
+
+    @Override
+    public RespBean addDep(Department dep) {
+        dep.setEnabled(true);
+        departmentMapper.addDep(dep);
+        if(1 == dep.getResult()){
+            return RespBean.success("添加成功",dep);
+        }
+        return RespBean.error("添加失败");
     }
 }
