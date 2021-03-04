@@ -1,7 +1,9 @@
 package com.happy.server.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.happy.server.common.RespBean;
 import com.happy.server.pojo.AdminRole;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -13,4 +15,5 @@ import com.happy.server.pojo.AdminRole;
  */
 public interface AdminRoleMapper extends BaseMapper<AdminRole> {
 
+    Integer addAdminRole(@Param("adminId") Integer adminId, @Param("rids") Integer[] rids);
 }
