@@ -45,4 +45,10 @@ public interface IAdminService extends IService<Admin> {
      */
     List<Role> getRole(Integer adminId);
 
+    /**
+     * 获取所有的操作员
+     * @param keywords
+     * @return
+     */
+    List<Admin> getAllAdmins(String keywords);
 }

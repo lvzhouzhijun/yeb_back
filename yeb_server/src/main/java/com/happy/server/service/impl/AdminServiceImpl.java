@@ -2,6 +2,7 @@ package com.happy.server.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.happy.server.common.AdminUtils;
 import com.happy.server.common.RespBean;
 import com.happy.server.config.security.JwtTokenUtil;
 import com.happy.server.mapper.AdminMapper;
@@ -90,5 +91,12 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     public List<Role> getRole(Integer adminId) {
 
         return roleMapper.getRoles(adminId);
+    }
+
+    @Override
+    public List<Admin> getAllAdmins(String keywords) {
+        Admin admin = (Admin) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        return adminMapper.getAllAdmins(AdminUtils.getCurrentAdmin().getId(),keywords);
     }
 }
