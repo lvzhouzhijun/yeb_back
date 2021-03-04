@@ -41,7 +41,7 @@ public class MenuRoleServiceImpl extends ServiceImpl<MenuRoleMapper, MenuRole> i
             return RespBean.success("更新成功");
         }
         // 批量更新
-        menuRoleMapper.insertRecord(rid,mids);
-        return null;
+        Integer result = menuRoleMapper.insertRecord(rid, mids);
+        return result == mids.length ? RespBean.success("更新成功") : RespBean.error("更新失败");
     }
 }

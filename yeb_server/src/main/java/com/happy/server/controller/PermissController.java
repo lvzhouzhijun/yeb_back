@@ -42,7 +42,7 @@ public class PermissController {
     }
 
     @ApiOperation(value = "添加角色")
-    @PostMapping("/")
+    @PostMapping("/role")
     public RespBean addRole(@RequestBody Role role){
         // 判断我们的角色是否以 ROLE_ 开头，我们项目使用 Security，Security 用的角色都必须以 ROLE_ 开头
         if(!role.getName().startsWith("ROLE_")){
