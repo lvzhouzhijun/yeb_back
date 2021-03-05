@@ -130,7 +130,6 @@ public class Employee implements Serializable {
     private LocalDate conversionTime;
 
     @ApiModelProperty(value = "离职日期")
-    @Excel(name = "离职日期",width = 20,format = "yyyy-MM-dd")
     private LocalDate notWorkDate;
 
     @ApiModelProperty(value = "合同起始日期")
@@ -144,7 +143,6 @@ public class Employee implements Serializable {
     private LocalDate endContract;
 
     @ApiModelProperty(value = "工龄")
-    @Excel(name = "工龄")
     private Integer workAge;
 
     @ApiModelProperty(value = "工资账套ID")
