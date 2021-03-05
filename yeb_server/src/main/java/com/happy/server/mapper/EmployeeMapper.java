@@ -7,6 +7,7 @@ import com.happy.server.pojo.Employee;
 import org.apache.ibatis.annotations.Param;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * <p>
@@ -28,4 +29,11 @@ public interface EmployeeMapper extends BaseMapper<Employee> {
     IPage<Employee> getEmployeeByPage(Page<Employee> page,
                                       @Param("employee") Employee employee,
                                       @Param("beginDateScope") LocalDate[] beginDateScope);
+
+    /**
+     * 查询员工，如果Id为空，就查所有员工
+     * @param id
+     * @return
+     */
+    List<Employee> getEmployee(@Param("id") Integer id);
 }
