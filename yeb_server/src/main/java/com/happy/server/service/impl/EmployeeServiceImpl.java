@@ -95,7 +95,7 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
             mailLog.setStatus(0);
             mailLog.setRouteKey(MailConstants.MAIL_ROUTING_KEY_NAME);
             mailLog.setExchange(MailConstants.MAIL_EXCHANGE_NAME);
-            mailLog.setCount(MailConstants.MAX_TRY_COUNT);
+            mailLog.setCount(0);
             // 当前时间 + 上 一分钟
             mailLog.setTryTime(LocalDateTime.now().plusMinutes(MailConstants.MSG_TIMEOUT));
             mailLog.setCreateTime(LocalDateTime.now());
