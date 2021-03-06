@@ -9,6 +9,7 @@ import com.happy.server.common.RespPageBean;
 import com.happy.server.mapper.EmployeeMapper;
 import com.happy.server.pojo.Employee;
 import com.happy.server.service.IEmployeeService;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,9 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
 
     @Autowired
     private EmployeeMapper employeeMapper;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     @Override
     public RespPageBean getEmployeeByPage(Integer currentPage, Integer size, Employee employee, LocalDate[] beginDateScope) {
@@ -72,6 +76,10 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
         DecimalFormat decimalFormat = new DecimalFormat("##.00");
         employee.setContractTerm(Double.parseDouble(decimalFormat.format(days / 365.00)));
         if(1 == employeeMapper.insert(employee)){
+            // 获取刚插入员工的信息
+            Employee emp = employeeMapper.getEmployee(employee.getId()).get(0);
+            // 发送消息
+            rabbitTemplate.convertAndSend("mail.welcome",emp);
             return RespBean.success("添加成功");
         }
         return RespBean.error("添加失败");
