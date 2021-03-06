@@ -6,6 +6,10 @@ spring:
     password: guest
     host: localhost
     port: 5672
+    # 消息确认回调
+    publisher-confirm-type: correlated
+    # 消息失败回调
+    publisher-returns: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/yeb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
