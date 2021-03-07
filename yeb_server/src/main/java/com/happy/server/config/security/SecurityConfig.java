@@ -115,6 +115,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/doc.html","/webjars/**",
                 "/swagger-resources/**",
                 "/v2/api-docs/**",
-                "/captcha");
+                "/captcha","/ws/**");
     }
 }
