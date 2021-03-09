@@ -1,5 +1,6 @@
 package com.happy.server.controller;
 
+import com.happy.server.common.FastDFSUtils;
 import com.happy.server.common.RespBean;
 import com.happy.server.pojo.Admin;
 import com.happy.server.service.IAdminService;
@@ -8,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
 
@@ -47,4 +50,16 @@ public class AdminInfoController {
         Integer adminId = (Integer) info.get("adminId");
         return adminService.updateAdminPassword(oldPass,pass,adminId);
     }
+
+    @ApiOperation(value = "更新用户头像")
+    @PostMapping("/admin/userface")
+    public RespBean updateAdminUserFace(MultipartFile file,
+                                        Integer id,
+                                        Authentication authentication){
+        String[] filePath = FastDFSUtils.upload(file);
+        String trackerUrl = FastDFSUtils.getTrackerUrl();
+        String url = trackerUrl + filePath[0] + "/" + filePath[1];
+        return adminService.updateAdminUserFace(url,id,authentication);
+    }
+
 }

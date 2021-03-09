@@ -5,6 +5,7 @@ import com.happy.server.common.RespBean;
 import com.happy.server.pojo.Admin;
 import com.happy.server.pojo.Menu;
 import com.happy.server.pojo.Role;
+import org.springframework.security.core.Authentication;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -68,4 +69,13 @@ public interface IAdminService extends IService<Admin> {
      * @return
      */
     RespBean updateAdminPassword(String oldPass, String pass, Integer adminId);
+
+    /**
+     * 更新用户头像
+     * @param url
+     * @param id
+     * @param authentication
+     * @return
+     */
+    RespBean updateAdminUserFace(String url, Integer id, Authentication authentication);
 }
